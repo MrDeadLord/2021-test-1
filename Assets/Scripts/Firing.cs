@@ -4,6 +4,10 @@ public class Firing : MonoBehaviour
 {
     #region ========== Variables ========
 
+    [SerializeField] GameObject _bullet;
+    [SerializeField] Transform _barrel;
+    [SerializeField] float _bulletSpeed = 1;
+
     Animator _anim;
 
     #endregion ========== Variables ========
@@ -23,15 +27,16 @@ public class Firing : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit))
-            {
-                Instantiate(Main.Instance.effect, hit.point, Quaternion.identity);
-            }
-
-            //transform.rotation = Quaternion.FromToRotation(transform.position, hit.point);
+            if (Physics.Raycast(ray, out hit))
+                transform.LookAt(hit.point);
 
             // Launch the animation
             _anim.SetTrigger("Fire");
+
+            // Shooting
+            GameObject bullet = Instantiate(_bullet, _barrel.position, _barrel.rotation);
+
+            bullet.GetComponent<Rigidbody>().AddForce(0, _bulletSpeed, 0);
         }
     }
 
