@@ -18,6 +18,9 @@ public class Health : MonoBehaviour
         _rig = GetComponent<Rigidbody>();
 
         _startScale = _healthUI.localScale;
+
+        if(tag == "Player")        
+            _healthUI = Main.Instance.HealthBar;        
     }
 
     private void Update()

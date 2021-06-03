@@ -14,6 +14,7 @@ public class Main : MonoBehaviour
 
     [SerializeField] GameObject _player;
     [SerializeField] Transform _spawnPosition;
+    [SerializeField] Transform _playersHealthbar;
 
     PlayFlowControl _pfControl;
 
@@ -41,4 +42,5 @@ public class Main : MonoBehaviour
     #endregion ========== Unity-time ========
 
     public PlayFlowControl PlayFlowContr { get { return _pfControl; } }
+    public Transform HealthBar { get { return _playersHealthbar; } }
 }

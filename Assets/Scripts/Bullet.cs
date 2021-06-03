@@ -17,18 +17,15 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-                
+
         _rb.AddForce(transform.up * _speed * Time.deltaTime, ForceMode.Impulse);
         Destroy(gameObject, _dieTime);
     }
 
     private void OnCollisionEnter(Collision coll)
     {
-        if(coll.transform.GetComponent<Health>() != null)
-        {
+        if (coll.transform.GetComponent<Health>() != null)
             coll.transform.GetComponent<Health>().TakeDamage(_damage);
-            Destroy(gameObject);
-        }
     }
 
     #endregion ========== Unity-time ========
