@@ -10,6 +10,7 @@ public class Main : MonoBehaviour
     /// Current level to know when to move
     /// </summary>
     public int currentLvl { get; set; }
+    public GameObject mainPlayer { get; set; }
 
     [SerializeField] GameObject _player;
     [SerializeField] Transform _spawnPosition;
@@ -33,7 +34,8 @@ public class Main : MonoBehaviour
         _pfControl.enemyCount = 6;
 
         // Creating a player
-        Instantiate(_player, _spawnPosition.position, _spawnPosition.rotation).GetComponent<Movement>().waypoints = _wayPoints;
+        mainPlayer = Instantiate(_player, _spawnPosition.position, _spawnPosition.rotation);
+        mainPlayer.GetComponent<Movement>().waypoints = _wayPoints;
     }
 
     #endregion ========== Unity-time ========

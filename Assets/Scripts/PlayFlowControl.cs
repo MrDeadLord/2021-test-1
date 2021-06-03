@@ -9,11 +9,11 @@ public class PlayFlowControl : MonoBehaviour
         switch (Main.Instance.currentLvl)
         {
             case 0:
-                if (enemyCount < 6)
+                if (enemyCount == 5)
                     Main.Instance.canMove = true;
                 break;
             case 1:
-                if (enemyCount < 4)
+                if (enemyCount == 3)
                     Main.Instance.canMove = true;
                 break;
             case 3:

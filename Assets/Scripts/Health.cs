@@ -5,16 +5,29 @@ public class Health : MonoBehaviour
 {
     [SerializeField] int _maxHP = 100;
     [SerializeField] int _deathTime = 2;
+    [SerializeField] Transform _healthUI;
 
+    Rigidbody _rig;
     int _curHP;
+    bool _dead = false;
+    Vector3 _startScale;
 
     private void Awake()
     {
         _curHP = _maxHP;
+        _rig = GetComponent<Rigidbody>();
+
+        _startScale = _healthUI.localScale;
     }
 
     private void Update()
     {
+        if (_dead)
+            return;
+
+        if (_curHP <= 30 && _rig.isKinematic)
+            _rig.isKinematic = false;
+
         if (_curHP <= 0)
             Death();
     }
@@ -22,13 +35,17 @@ public class Health : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         _curHP -= dmg;
+        _healthUI.localScale = new Vector3(_startScale.x, _curHP * 0.01f, _startScale.z);
     }
 
     void Death()
-    {
-        GetComponent<Rigidbody>().isKinematic = false;
+    {        
         GetComponent<NavMeshAgent>().enabled = false;
-        Destroy(gameObject, _deathTime);
+        
         Main.Instance.PlayFlowContr.enemyCount--;
+
+        Destroy(gameObject, _deathTime);
+
+        _dead = true;
     }
 }
