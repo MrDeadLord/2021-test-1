@@ -34,8 +34,11 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        if (_dead)
+            return;
+
         _curHP -= dmg;
-        _healthUI.localScale = new Vector3(_startScale.x, _curHP * 0.01f, _startScale.z);
+        _healthUI.localScale = new Vector3(_startScale.x, _startScale.y * _curHP * 0.01f, _startScale.z);
     }
 
     void Death()
