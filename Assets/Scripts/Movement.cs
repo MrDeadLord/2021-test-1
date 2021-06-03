@@ -35,12 +35,14 @@ public class Movement : MonoBehaviour
             _anim.SetBool("Moving", true);
         }
 
+        // Stoping the player and enabling him to fire
         if (Math.Round(transform.position.z, 1) == Math.Round(waypoints[position].position.z, 1) &&
         Math.Round(transform.position.y, 1) == Math.Round(waypoints[position].position.y, 1))
         {
             Main.Instance.canMove = false;
             _anim.SetBool("Moving", false);
 
+            Main.Instance.currentLvl = position;
             position++;
         }
 

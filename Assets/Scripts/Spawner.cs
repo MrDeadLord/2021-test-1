@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour
                 rand = Random.Range(0, pos.Length);
             } while (pos[rand] == null);
 
-            Instantiate(_enemy, pos[rand].position, pos[rand].rotation);
+            Instantiate(_enemy, pos[rand]);
             pos[rand] = null;
         }
     }

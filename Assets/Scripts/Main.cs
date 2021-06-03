@@ -6,9 +6,15 @@ public class Main : MonoBehaviour
     #region ========== Variables ========
 
     public bool canMove { get; set; }
-    public ParticleSystem effect;   // бпелеммн
-    [SerializeField] GameObject player;
-    [SerializeField] Transform spawnPosition;
+    /// <summary>
+    /// Current level to know when to move
+    /// </summary>
+    public int currentLvl { get; set; }
+
+    [SerializeField] GameObject _player;
+    [SerializeField] Transform _spawnPosition;
+
+    PlayFlowControl _pfControl;
 
     [SerializeField] [Tooltip("Waypoints for the player")] List<Transform> _wayPoints = new List<Transform>();
 
@@ -23,14 +29,14 @@ public class Main : MonoBehaviour
         Instance = this;
         canMove = true;
 
-        Instantiate(player, spawnPosition.position, spawnPosition.rotation).GetComponent<Movement>().waypoints = _wayPoints;
+        _pfControl = GetComponent<PlayFlowControl>();
+        _pfControl.enemyCount = 6;
+
+        // Creating a player
+        Instantiate(_player, _spawnPosition.position, _spawnPosition.rotation).GetComponent<Movement>().waypoints = _wayPoints;
     }
 
     #endregion ========== Unity-time ========
 
-    #region ========== Methods ========
-    #endregion ========== Methods ========
-
-    #region ========== Publics ========
-    #endregion ========== Publics ========
+    public PlayFlowControl PlayFlowContr { get { return _pfControl; } }
 }

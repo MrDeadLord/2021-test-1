@@ -6,7 +6,6 @@ public class Firing : MonoBehaviour
 
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _barrel;
-    [SerializeField] float _bulletSpeed = 1;
 
     Animator _anim;
 
@@ -34,9 +33,7 @@ public class Firing : MonoBehaviour
             _anim.SetTrigger("Fire");
 
             // Shooting
-            GameObject bullet = Instantiate(_bullet, _barrel.position, _barrel.rotation);
-
-            bullet.GetComponent<Rigidbody>().AddForce(0, _bulletSpeed, 0);
+            Instantiate(_bullet, _barrel.position, _barrel.rotation);
         }
     }
 
